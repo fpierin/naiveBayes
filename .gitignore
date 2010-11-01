@@ -1,0 +1,4 @@
+lib/*.* 
+dataSource/*.*
+*.class
+*.jar
