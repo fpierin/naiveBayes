@@ -1,0 +1,4 @@
+@Author: Felipe Pierin
+@Date:   01/11/2010
+
+A simple naive bayes text classifier that contatins text preparation skills and functions like holdout. 

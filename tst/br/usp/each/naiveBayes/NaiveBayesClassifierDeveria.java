@@ -73,19 +73,20 @@ public class NaiveBayesClassifierDeveria {
 	
 	@Test
 	public void calcularAProbabilidadeConhecidaDeUmDadoUmDocumentoDeTextoPertencerAUmaDeterminadaClasse() throws Exception {
-		NaiveBayesClassifier naiveBayesClassifier = new NaiveBayesClassifier(classifications);
 		final List<String> bagOfWords = Arrays.asList("Uni", "Dune", "Teti");
 		final String classification = "C";
 		final BayesianClassification classeC = new BayesianClassification("C");
 		
-		
 		contexto.checking(new Expectations(){{
+			allowing(classifications).count();
+			will(returnValue(2));
 			one(classifications).get(classification);
 			will(returnValue(classeC));
 		}});
 		
+		NaiveBayesClassifier naiveBayesClassifier = new NaiveBayesClassifier(classifications);
 		double valorEncontrado = naiveBayesClassifier.classify(bagOfWords);
-		Assert.assertEquals(valorEncontrado, 0.5, 0.000001);
+		Assert.assertEquals(0.5, valorEncontrado, 0.000001);
 	}
 	
 	

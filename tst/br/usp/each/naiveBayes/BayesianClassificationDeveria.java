@@ -24,50 +24,60 @@ public class BayesianClassificationDeveria {
 
 	@Test
 	public void manterUmVocabularioNaoNulo() {
-		BayesianClassification bayesianClass = new BayesianClassification(classificacao);
+		BayesianClassification bayesianClass = new BayesianClassification(
+				classificacao);
 		Vocabulary valorEncontrado = bayesianClass.getVocabulary();
 		assertThat(valorEncontrado, CoreMatchers.notNullValue());
 	}
 
 	@Test
 	public void calcularAProbabilidadeConhecidaDeUmaListaDePalavrasConhecidaPertencerAClasse() {
-		BayesianClassification bayesianClass = new BayesianClassification(classificacao);
+		BayesianClassification bayesianClass = new BayesianClassification(
+				classificacao);
 
 		List<String> termList = Arrays.asList("roberto");
 		bayesianClass.getVocabulary().add("julio");
 		bayesianClass.getVocabulary().add("roberto");
 		double probalidadeEsperada = 0.5;
 
-		calculoEsperadoDeProbabilidadeDadoUmaClasseBayesianaEUmaListaDeTermos(termList, bayesianClass, probalidadeEsperada);
+		calculoEsperadoDeProbabilidadeDadoUmaClasseBayesianaEUmaListaDeTermos(
+				termList, bayesianClass, probalidadeEsperada);
 	}
 
 	@Test
 	public void calcularAProbabilidadeEsperadaDeUmaPalavraQuandoElaNaoPertenceAoVocabulario() {
-		BayesianClassification bayesianClass = new BayesianClassification(classificacao);
+		BayesianClassification bayesianClass = new BayesianClassification(
+				classificacao);
 
 		List<String> termList = Arrays.asList("roberto");
 		bayesianClass.getVocabulary().add("julio");
 		double probalidadeEsperada = 0.25;
 
-		calculoEsperadoDeProbabilidadeDadoUmaClasseBayesianaEUmaListaDeTermos(termList, bayesianClass, probalidadeEsperada);
+		calculoEsperadoDeProbabilidadeDadoUmaClasseBayesianaEUmaListaDeTermos(
+				termList, bayesianClass, probalidadeEsperada);
 	}
 
 	@Test
 	public void calcularAProbabilidadeEsperadaDeUmaListaVazia() {
-		BayesianClassification bayesianClass = new BayesianClassification(classificacao);
+		BayesianClassification bayesianClass = new BayesianClassification(
+				classificacao);
 		List<String> termList = new ArrayList<String>();
-		calculoEsperadoDeProbabilidadeDadoUmaClasseBayesianaEUmaListaDeTermos(termList, bayesianClass, 0);
+		calculoEsperadoDeProbabilidadeDadoUmaClasseBayesianaEUmaListaDeTermos(
+				termList, bayesianClass, 0);
 	}
-	
+
 	@Test
-	public void guardarTodasAsSuasClassificacoesEmMaiusculo(){
-		BayesianClassification bayesianClass = new BayesianClassification("hoMERo");
+	public void guardarTodasAsSuasClassificacoesEmMaiusculo() {
+		BayesianClassification bayesianClass = new BayesianClassification(
+				"hoMERo");
 		assertEquals("HOMERO", bayesianClass.getName());
 	}
 
-	private void calculoEsperadoDeProbabilidadeDadoUmaClasseBayesianaEUmaListaDeTermos(List<String> termList, 
-			BayesianClassification bayesianClass, double probalidadeEsperada) {
-		double probabilidadeEncontrada = bayesianClass.getClassificationProbality(termList);
+	private void calculoEsperadoDeProbabilidadeDadoUmaClasseBayesianaEUmaListaDeTermos(
+			List<String> termList, BayesianClassification bayesianClass,
+			double probalidadeEsperada) {
+		double probabilidadeEncontrada = bayesianClass
+				.getClassificationProbality(termList);
 		assertEquals(probalidadeEsperada, probabilidadeEncontrada, 0.000001);
 	}
 }
