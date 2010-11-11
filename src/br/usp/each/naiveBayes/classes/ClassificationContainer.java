@@ -44,13 +44,13 @@ public class ClassificationContainer implements Classifications {
 	}
 
 	@Override
-	public void remove(BayesianClassification bayesianClassification) {
-		this.classifications.remove(bayesianClassification);
+	public Classification get(int index) {
+		return this.classifications.get(index);
 	}
 
 	@Override
-	public Classification get(int index) {
-		return this.classifications.get(index);
+	public void remove(Classification classification) {
+		this.classifications.remove(classification);		
 	}
 
 }
