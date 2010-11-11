@@ -4,19 +4,20 @@ import java.util.Iterator;
 import java.util.List;
 
 import br.usp.each.naiveBayes.interfaces.Vocabulary;
+import br.usp.each.processor.Classification;
 
-
-public class BayesianClassification {
+public class BayesianClassification implements Classification {
 
 	private final String name;
-	private final Vocabulary vocabulary;	
-
-	public BayesianClassification(String name) {
+	private final Vocabulary vocabulary;
+	private double probality = 0.0;
+	
+	public BayesianClassification(String name, Vocabulary vocabulary){
 		if ((name == null) || (name.isEmpty())){
 			throw new IllegalArgumentException("Uma classe bayesiana precisa ser identificada com um nome.");
 		}
 		this.name = setName(name);
-		this.vocabulary = new BayesianVocabulary(); 
+		this.vocabulary = vocabulary;
 	}
 
 	private String setName(String name) {
@@ -31,16 +32,25 @@ public class BayesianClassification {
 		return name;
 	}
 
-	public double getClassificationProbality(List<String> termList) {
+	public double getProbality(List<String> termList) {
 		if (termList.size() > 0){
 			double probalityValue = 1.0;
 		    Iterator<String> termIterator = termList.iterator();
 		    while (termIterator.hasNext()){
-		    	probalityValue *= vocabulary.getLaplaceFrequencyOf(termIterator.next(), termList.size(), 0.5);
+		    	double laplaceFrequencyOf = vocabulary.getLaplaceFrequencyOf(termIterator.next(), termList.size(), 0.5);
+				probalityValue += Math.log(laplaceFrequencyOf);
 		    }			
-		    return probalityValue;
+		    return (this.probality != 0.0) ? (this.probality + probalityValue) : probalityValue;
 		}
 	    return 0.0;		
+	}
+
+	public void setProbality(double probality) {
+		this.probality = Math.log(probality);
+	}
+
+	public double getProbality() {
+		return probality;
 	}
 
 }

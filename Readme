@@ -1,4 +1,5 @@
 @Author: Felipe Pierin
 @Date:   01/11/2010
 
-A simple naive bayes text classifier that contatins text preparation skills and functions like holdout. 
+   A simple naive bayes text classifier that contatins text preparation skills and
+performance evaluators like holdout and N-Fold cross validation.

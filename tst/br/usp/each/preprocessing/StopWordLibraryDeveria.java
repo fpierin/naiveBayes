@@ -1,31 +1,29 @@
 package br.usp.each.preprocessing;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
+
+import java.io.File;
 
 import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 
-/* Motivação:
- * "Stop words (ou palavras de parada – tradução livre) são palavras que podem ser consideradas 
- * irrelevantes para o conjunto de resultados a ser exibido em uma busca realizada em uma search engine. 
- * Exemplos: as, e, os, de, para, com, sem, foi."
- */
+import br.usp.each.settings.Settings;
 
-public class StopWordDictionaryDeveria {
+public class StopWordLibraryDeveria {
 
 	@Test(expected=IllegalArgumentException.class)
 	public void lancarExcessaoAoReceberUmParametroNulo() throws Exception {
-		new StopWordDictionary(null);
+		new StopWordLibrary(null);
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void lancarExcessaoAoReceberUmParametroVazio() throws Exception {
-		new StopWordDictionary("");
+		new StopWordLibrary(new File(""));
 	}
 	
 	@Test
 	public void identificarUmaStopWordConhecidaNoSeuDicionario() throws Exception {
-		StopWordDictionary stopWordDictionary = new StopWordDictionary("dataSource/utils/stopWords.dat");
+		Library stopWordDictionary = new StopWordLibrary(new Settings().getStopWordLibrary());
 		boolean valorRecuperado = stopWordDictionary.contains("GoTTen");
 		assertThat(valorRecuperado, CoreMatchers.is(true));
 	}

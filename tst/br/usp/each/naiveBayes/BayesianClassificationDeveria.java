@@ -19,21 +19,19 @@ public class BayesianClassificationDeveria {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void manterUmaClasseDeIdentificacaoNaoNula() {
-		new BayesianClassification(null);
+		new BayesianClassification(null, null);
 	}
 
 	@Test
 	public void manterUmVocabularioNaoNulo() {
-		BayesianClassification bayesianClass = new BayesianClassification(
-				classificacao);
+		BayesianClassification bayesianClass = new BayesianClassification(classificacao, null);
 		Vocabulary valorEncontrado = bayesianClass.getVocabulary();
 		assertThat(valorEncontrado, CoreMatchers.notNullValue());
 	}
 
 	@Test
 	public void calcularAProbabilidadeConhecidaDeUmaListaDePalavrasConhecidaPertencerAClasse() {
-		BayesianClassification bayesianClass = new BayesianClassification(
-				classificacao);
+		BayesianClassification bayesianClass = new BayesianClassification(classificacao, null);
 
 		List<String> termList = Arrays.asList("roberto");
 		bayesianClass.getVocabulary().add("julio");
@@ -46,8 +44,7 @@ public class BayesianClassificationDeveria {
 
 	@Test
 	public void calcularAProbabilidadeEsperadaDeUmaPalavraQuandoElaNaoPertenceAoVocabulario() {
-		BayesianClassification bayesianClass = new BayesianClassification(
-				classificacao);
+		BayesianClassification bayesianClass = new BayesianClassification(classificacao, null);
 
 		List<String> termList = Arrays.asList("roberto");
 		bayesianClass.getVocabulary().add("julio");
@@ -59,8 +56,7 @@ public class BayesianClassificationDeveria {
 
 	@Test
 	public void calcularAProbabilidadeEsperadaDeUmaListaVazia() {
-		BayesianClassification bayesianClass = new BayesianClassification(
-				classificacao);
+		BayesianClassification bayesianClass = new BayesianClassification(classificacao, null);
 		List<String> termList = new ArrayList<String>();
 		calculoEsperadoDeProbabilidadeDadoUmaClasseBayesianaEUmaListaDeTermos(
 				termList, bayesianClass, 0);
@@ -68,8 +64,7 @@ public class BayesianClassificationDeveria {
 
 	@Test
 	public void guardarTodasAsSuasClassificacoesEmMaiusculo() {
-		BayesianClassification bayesianClass = new BayesianClassification(
-				"hoMERo");
+		BayesianClassification bayesianClass = new BayesianClassification("hoMERo", null);
 		assertEquals("HOMERO", bayesianClass.getName());
 	}
 
@@ -77,7 +72,7 @@ public class BayesianClassificationDeveria {
 			List<String> termList, BayesianClassification bayesianClass,
 			double probalidadeEsperada) {
 		double probabilidadeEncontrada = bayesianClass
-				.getClassificationProbality(termList);
+				.getProbality(termList);
 		assertEquals(probalidadeEsperada, probabilidadeEncontrada, 0.000001);
 	}
 }

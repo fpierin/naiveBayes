@@ -1,4 +1,4 @@
-package br.usp.each.preprocessing;
+package br.usp.each.empiric;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -7,6 +7,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
+
+import br.usp.each.preprocessing.StopWordLibrary;
+import br.usp.each.preprocessing.Library;
+import br.usp.each.settings.Settings;
 
 public class Checker {
 
@@ -20,7 +24,7 @@ public class Checker {
 	 * Last-modified: $Date: 93/04/01 14:39:06 $
 	 */
 	public static void main(String[] args) throws IOException {
-		StopWordDictionary stopWordDictionary = new StopWordDictionary("dataSource/utils/stopWords.dat");
+		Library stopWordDictionary = new StopWordLibrary(new Settings().getStopWordLibrary());
 		File directory = new File("dataSource/docs/Teste/comp.os.ms-windows.misc");
 		String[] arquivos = directory.list();
 		if (arquivos != null) {

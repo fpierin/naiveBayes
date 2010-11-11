@@ -35,7 +35,7 @@ public final class BayesianVocabulary implements Vocabulary {
 		return this.vocabulary.size();
 	}
 
-	public List<String> getWordList() {
+	public List<String> list() {
 		return vocabulary;
 	}
 
@@ -60,6 +60,13 @@ public final class BayesianVocabulary implements Vocabulary {
 			return (double) wordCount / laplaceBase;			
 		}else{
 			return 0.0;
+		}
+	}
+
+	@Override
+	public void merge(Vocabulary vocabulary) {
+		if (!(vocabulary == null)){
+			this.vocabulary.addAll(vocabulary.list());
 		}
 	}
 

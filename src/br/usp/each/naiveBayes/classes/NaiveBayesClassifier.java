@@ -3,8 +3,7 @@ package br.usp.each.naiveBayes.classes;
 import java.util.List;
 
 import br.usp.each.naiveBayes.interfaces.Classifications;
-
-
+import br.usp.each.processor.Classification;
 
 public final class NaiveBayesClassifier {
 
@@ -32,8 +31,25 @@ public final class NaiveBayesClassifier {
 		this.classifications.add(classificacao);
 	}
 
-	public double classify(List<String> bagOfWords) {
-		return 0;
+	public String classify(List<String> bagOfWords) {
+		String resultClass = null;
+		double resultProbality = Double.NEGATIVE_INFINITY;		
+		
+		for (int i = 0; i < classifications.count(); i++){
+			Classification classification = classifications.get(i);			
+			double classificationProbality = classification.getProbality(bagOfWords);			
+
+			System.out.println(classification.getName() + ": " + classificationProbality);
+			
+			if (classificationProbality > resultProbality) {
+				resultProbality = classificationProbality;
+				resultClass = classification.getName();
+			}
+		}
+		
+		
+		return (resultClass != null) ? resultClass : "none";
+		
 	}
 
 }
