@@ -91,7 +91,7 @@ public class TextProcessor {
 	}
 
 	public static void main(String[] args) throws FileNotFoundException {
-		final String string = "dataSource/docs/Treinamento/sci.space";		
+		final String string = "dataSource/samples/Treinamento/sci.space";		
 		final TextProcessor textProcessor = new TextProcessor();
 		File diretorio = new File(string);
 		File[] arquivos = diretorio.listFiles(); 

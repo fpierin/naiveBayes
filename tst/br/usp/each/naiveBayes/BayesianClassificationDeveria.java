@@ -11,6 +11,7 @@ import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 
 import br.usp.each.naiveBayes.classes.BayesianClassification;
+import br.usp.each.naiveBayes.classes.BayesianVocabulary;
 import br.usp.each.naiveBayes.interfaces.Vocabulary;
 
 public class BayesianClassificationDeveria {
@@ -31,7 +32,8 @@ public class BayesianClassificationDeveria {
 
 	@Test
 	public void calcularAProbabilidadeConhecidaDeUmaListaDePalavrasConhecidaPertencerAClasse() {
-		BayesianClassification bayesianClass = new BayesianClassification(classificacao, null);
+		Vocabulary x = new BayesianVocabulary();
+		BayesianClassification bayesianClass = new BayesianClassification(classificacao, x );
 
 		List<String> termList = Arrays.asList("roberto");
 		bayesianClass.getVocabulary().add("julio");

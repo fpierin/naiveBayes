@@ -25,7 +25,7 @@ public class Checker {
 	 */
 	public static void main(String[] args) throws IOException {
 		Library stopWordDictionary = new StopWordLibrary(new Settings().getStopWordLibrary());
-		File directory = new File("dataSource/docs/Teste/comp.os.ms-windows.misc");
+		File directory = new File("dataSource/samples/Teste/comp.os.ms-windows.misc");
 		String[] arquivos = directory.list();
 		if (arquivos != null) {
 			for (int i = 0; i < arquivos.length; i++) {
